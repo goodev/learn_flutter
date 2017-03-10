@@ -1,4 +1,4 @@
-package com.yourcompany.learnFlutter;
+package org.goodev.learnflutter;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

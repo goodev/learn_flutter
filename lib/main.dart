@@ -76,9 +76,63 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(config.title),
       ),
       body: new Center(
-        child: new Text(
-          'Button tapped $_counter time${ _counter == 1 ? '' : 's' }.',
-        ),
+        child: new Padding(
+            padding: new EdgeInsets.all(8.0),
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                new Container(
+                  padding: new EdgeInsets.only(bottom: 8.0),
+                  decoration:
+                      new BoxDecoration(backgroundColor: Colors.grey[200]),
+                  child: new Image.network(
+                      'https://flutter.io/images/flutter-mark-square-100.png'),
+                  margin: new EdgeInsets.only(bottom: 8.0),
+                  transform: new Matrix4.rotationZ(100.0),
+                  constraints: new BoxConstraints(minHeight: 150.0),
+                ),
+                new Text(
+                  'Flutter is a mobile app SDK for building high-performance, high-fidelity, apps for iOS and Android, from a single codebase.',
+                  style: new TextStyle(fontSize: 20.0, color: Colors.teal[500]),
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  textAlign: TextAlign.left,
+                ),
+                new Padding(
+                  padding: new EdgeInsets.only(bottom: 8.0),
+                  child: new Text(
+                    'Flutter 是一个用一套代码就可以构建高性能安卓和苹果应用的移动应用 SDK。 ',
+                    style: new TextStyle(fontSize: 28.0),
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                new RichText(
+                  text: new TextSpan(
+                    text: 'Button tapped ',
+                    style: new TextStyle(
+                        inherit: true, fontSize: 32.0, color: Colors.black),
+                    children: <TextSpan>[
+                      new TextSpan(
+                          text: '$_counter',
+                          style: new TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.amber[500])),
+                      new TextSpan(text: ' time'),
+                      new TextSpan(
+                          text: _counter == 1 ? '' : 's',
+                          style: new TextStyle(
+                              fontWeight: FontWeight.w200,
+                              color: Colors.cyan[500])),
+                      new TextSpan(text: '.'),
+                    ],
+                  ),
+                ),
+              ],
+            )),
       ),
       floatingActionButton: new FloatingActionButton(
         onPressed: _incrementCounter,

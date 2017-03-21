@@ -1,3 +1,5 @@
+import 'dart:ui' as ui show window;
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,24 +7,32 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final Map<String, WidgetBuilder> _routes = <String, WidgetBuilder>{
+    Navigator.defaultRouteName: (context) =>
+    new MyHomePage(title: 'Flutter Demo Home Page')
+  };
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter App',
+      debugShowMaterialGrid: true,
+      routes: _routes,
       theme: new ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting
-        // the app, try changing the primarySwatch below to Colors.green
-        // and then invoke "hot reload" (press "r" in the console where
-        // you ran "flutter run", or press Run > Hot Reload App in IntelliJ).
-        // Notice that the counter didn't reset back to zero -- the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+      // This is the theme of your application.
+      //
+      // Try running your application with "flutter run". You'll see
+      // the application has a blue toolbar. Then, without quitting
+      // the app, try changing the primarySwatch below to Colors.green
+      // and then invoke "hot reload" (press "r" in the console where
+      // you ran "flutter run", or press Run > Hot Reload App in IntelliJ).
+      // Notice that the counter didn't reset back to zero -- the application
+      // is not restarted.
+        primarySwatch: Colors.cyan,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      // 使用 _routes 中定义的 默认路由来替代 home
+      //home: new MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -70,9 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // instances of widgets.
     return new Scaffold(
       appBar: new AppBar(
-        // Here we take the value from the MyHomePage object that
-        // was created by the App.build method, and use it to set
-        // our appbar title.
+      // Here we take the value from the MyHomePage object that
+      // was created by the App.build method, and use it to set
+      // our appbar title.
         title: new Text(config.title),
       ),
       body: new Center(
@@ -80,11 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: new EdgeInsets.all(8.0),
             child: new Column(
               mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 new Container(
                   padding: new EdgeInsets.only(bottom: 8.0),
                   decoration:
-                      new BoxDecoration(backgroundColor: Colors.grey[200]),
+                  new BoxDecoration(backgroundColor: Colors.grey[200]),
                   child: new Image.network(
                       'https://flutter.io/images/flutter-mark-square-100.png'),
                   margin: new EdgeInsets.only(bottom: 8.0),

@@ -54,8 +54,13 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
+const String _kAsset0 = 'res/images/16c477b.jpg';
+const String _kAsset1 = 'res/images/zach.jpg';
+const String _kAsset2 = 'res/images/sandra-adams.jpg';
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  int _currentIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -133,6 +138,38 @@ class _MyHomePageState extends State<MyHomePage> {
           )),
     );
 
+    final BottomNavigationBar botNavBar = new BottomNavigationBar(
+      items: <BottomNavigationBarItem>[
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.access_alarm),
+          title: new Text('Alarm'),
+          backgroundColor: Colors.deepPurple[500],
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.save),
+          title: new Text('Save'),
+          backgroundColor: Colors.deepOrange[500],
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.cloud),
+          title: new Text('Cloud'),
+          backgroundColor: Colors.teal[500],
+        ),
+        new BottomNavigationBarItem(
+          icon: new Icon(Icons.favorite),
+          title: new Text('Favorites'),
+          backgroundColor: Colors.indigo[500],
+        )
+      ],
+      currentIndex: _currentIndex,
+      type: BottomNavigationBarType.shifting,
+      onTap: (int index) {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+    );
+
     // This method is rerun every time setState is called, for instance
     // as done by the _incrementCounter method above.
     // The Flutter framework has been optimized to make rerunning
@@ -140,10 +177,34 @@ class _MyHomePageState extends State<MyHomePage> {
     // needs updating rather than having to individually change
     // instances of widgets.
     return new Scaffold(
+      bottomNavigationBar: botNavBar,
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+            new UserAccountsDrawerHeader(
+              accountName: new Text('User Name'),
+              accountEmail: new Text('email@example.com'),
+              currentAccountPicture:
+                  new CircleAvatar(backgroundImage: new AssetImage(_kAsset0)),
+              otherAccountsPictures: <Widget>[
+                new CircleAvatar(backgroundImage: new AssetImage(_kAsset1)),
+                new CircleAvatar(backgroundImage: new AssetImage(_kAsset2)),
+              ],
+              onDetailsPressed: () {},
+            ),
+            new ClipRect(
+              child: new DrawerItem(
+                icon: new CircleAvatar(child: new Text("A")),
+                child: new Text('Drawer item A'),
+                onPressed: () => {},
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: new AppBar(
         title: new Text(config.title),
-        leading: new Icon(Icons.home),
-        backgroundColor: Colors.amber[500],
+        //leading: new Icon(Icons.home), 不设置这个属性，则 Drawer 会自动显示一个图标
         centerTitle: true,
         actions: <Widget>[
           new IconButton(

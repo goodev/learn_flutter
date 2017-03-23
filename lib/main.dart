@@ -138,6 +138,17 @@ class _MyHomePageState extends State<MyHomePage> {
           )),
     );
 
+    final List<FlatButton> footerButtons = <FlatButton>[
+      new FlatButton(
+        child: new Text("OK"),
+        onPressed: () => {},
+      ),
+      new FlatButton(
+        child: new Text("CANCEL"),
+        onPressed: () => {},
+      ),
+    ];
+
     final BottomNavigationBar botNavBar = new BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         new BottomNavigationBarItem(
@@ -178,6 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // instances of widgets.
     return new Scaffold(
       bottomNavigationBar: botNavBar,
+      persistentFooterButtons: footerButtons,
       drawer: new Drawer(
         child: new ListView(
           children: <Widget>[
